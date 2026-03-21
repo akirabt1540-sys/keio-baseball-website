@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>慶應義塾体育会野球部 — Keio University Baseball Club</title>
+  <meta name="description" content="慶應義塾体育会野球部公式サイト。東京六大学野球連盟所属。1888年創部、日本最古の大学野球部。">
+  <meta property="og:title" content="慶應義塾体育会野球部">
+  <meta property="og:description" content="Keio University Baseball Club — Since 1888">
+  <meta property="og:image" content="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2020/12/resentnews_default.jpg">
+  <link rel="icon" href="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2021/03/cropped-siteicon-1-32x32.png" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #001e62;
+      --navy-rgb: 0, 30, 98;
+      --bg: #ffffff;
+      --bg-warm: #f8f6f3;
+      --text: #1a1a1a;
+      --text-sub: #555555;
+      --text-muted: #999999;
+      --border: rgba(0,0,0,0.06);
+      --font-serif-en: 'Cormorant Garamond', serif;
+      --font-serif-jp: 'Noto Serif JP', serif;
+      --font-sans-en: 'Montserrat', sans-serif;
+      --font-sans-jp: 'Noto Sans JP', sans-serif;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    ::selection { background: var(--navy); color: #fff; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans-jp);
+      background: var(--bg); color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,30,98,0.15); border-radius: 2px; }
+
+    /* ===== LOADER ===== */
+    #loader {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #000;
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.6s ease;
+    }
+    #loader.done { opacity: 0; pointer-events: none; }
+    #loader img {
+      width: 72px; height: 72px;
+      opacity: 0;
+      animation: loaderFadeIn 0.8s ease forwards;
+    }
+    @keyframes loaderFadeIn {
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* ===== NAVBAR ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-inner {
+      max-width: 100%; margin: 0 auto;
+      padding: 18px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #navbar.scrolled .nav-inner {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 48px;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 36px; transition: all 0.4s; }
+    .nav-logo img.logo-white { filter: brightness(0) invert(1); }
+    #navbar.scrolled .nav-logo img.logo-white { filter: none; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a {
+      font-family: var(--font-sans-jp);
+      font-size: 0.72rem; color: rgba(255,255,255,0.8); text-decoration: none;
+      font-weight: 400; transition: color 0.3s; letter-spacing: 0.08em;
+    }
+    .nav-links a:hover { color: #fff; }
+    #navbar.scrolled .nav-links a { color: var(--text-sub); }
+    #navbar.scrolled .nav-links a:hover { color: var(--navy); }
+    /* Separator before CTA */
+    .nav-separator {
+      width: 1px; height: 16px; background: rgba(255,255,255,0.25);
+    }
+    #navbar.scrolled .nav-separator { background: rgba(0,0,0,0.12); }
+    /* CTA button */
+    .nav-cta {
+      font-family: var(--font-sans-jp) !important;
+      font-size: 0.72rem !important; font-weight: 500 !important;
+      background: var(--navy) !important; color: #fff !important;
+      padding: 8px 20px !important; border-radius: 4px;
+      letter-spacing: 0.08em; transition: all 0.3s;
+    }
+    .nav-cta:hover { opacity: 0.85; color: #fff !important; }
+    #navbar.scrolled .nav-cta { color: #fff !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      width: 32px; height: 32px; position: relative; z-index: 1002;
+    }
+    .hamburger span {
+      display: block; width: 20px; height: 1.5px; background: #fff;
+      position: absolute; left: 6px; transition: all 0.3s;
+    }
+    .hamburger span:nth-child(1) { top: 10px; }
+    .hamburger span:nth-child(2) { top: 15px; }
+    .hamburger span:nth-child(3) { top: 20px; }
+    #navbar.scrolled .hamburger span { background: var(--text); }
+    .hamburger.open span:nth-child(1) { top: 15px; transform: rotate(45deg); background: #fff; }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { top: 15px; transform: rotate(-45deg); background: #fff; }
+
+    /* Mobile overlay */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 1001;
+      background: rgba(0,0,0,0.95);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; }
+    .mobile-menu a {
+      font-family: var(--font-serif-en);
+      font-size: 1.4rem; color: rgba(255,255,255,0.7); text-decoration: none;
+      letter-spacing: 0.15em; font-weight: 300; transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .nav-inner { padding: 14px 24px; }
+      .hamburger { display: block; }
+    }
+
+    /* ===== HERO — Panorama Crossfade Slider ===== */
+    #hero {
+      position: relative; height: 100vh; overflow: hidden;
+      background: #000;
+    }
+    /* Slider container — vertically centered, holds panorama images */
+    .hero-slider {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-slide {
+      position: absolute;
+      top: 50%; left: 0;
+      transform: translateY(-50%);
+      height: 70vh;
+      width: auto;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      will-change: opacity, transform;
+      filter: contrast(1.08) saturate(0.85) brightness(0.95);
+    }
+    .hero-slide.active {
+      opacity: 1;
+    }
+    @keyframes panHorizontal {
+      0% { transform: translateY(-50%) translateX(0); }
+      100% { transform: translateY(-50%) translateX(-30%); }
+    }
+    .hero-slide.active {
+      animation: panHorizontal 15s ease-in-out forwards;
+    }
+    /* Dark overlay */
+    #hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.35) 0%,
+        rgba(0,0,0,0.15) 30%,
+        rgba(0,0,0,0.15) 70%,
+        rgba(0,0,0,0.4) 100%
+      );
+      z-index: 1;
+    }
+    /* Hero content */
+    #hero-content {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+    }
+    .hero-emblem {
+      width: 72px; height: 72px; margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    .hero-title {
+      font-family: var(--font-serif-en);
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: 0.25em;
+      color: #fff;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.15);
+    }
+    .hero-sub {
+      font-family: var(--font-serif-jp);
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      font-weight: 300; color: rgba(255,255,255,0.7);
+      letter-spacing: 0.3em; margin-top: 1rem;
+    }
+    .hero-year {
+      font-family: var(--font-serif-en);
+      font-size: 0.8rem; font-weight: 300;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.2em; margin-top: 2.5rem;
+    }
+    .scroll-indicator {
+      position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
+      z-index: 2;
+    }
+    .scroll-indicator::after {
+      content: '';
+      display: block; width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 1; transform: scaleY(1); }
+      50% { opacity: 0.4; transform: scaleY(0.6); }
+    }
+    /* Mobile: smaller height, bigger pan */
+    @media (max-width: 900px) {
+      .hero-slide {
+        height: 50vh;
+      }
+      @keyframes panHorizontal {
+        0% { transform: translateY(-50%) translateX(0); }
+        100% { transform: translateY(-50%) translateX(-50%); }
+      }
+    }
+
+    /* ===== PHILOSOPHY SECTION ===== */
+    #philosophy {
+      background: #000; color: #fff;
+      height: 100vh; min-height: 600px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+      position: relative;
+    }
+    .philosophy-inner { max-width: 700px; }
+    .philosophy-quote {
+      font-family: var(--font-serif-jp);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400; letter-spacing: 0.15em;
+      line-height: 1.6; margin-bottom: 3rem;
+    }
+    .philosophy-body {
+      font-family: var(--font-serif-jp);
+      font-size: clamp(0.82rem, 1.3vw, 0.95rem);
+      font-weight: 300; color: rgba(255,255,255,0.6);
+      line-height: 2.8; letter-spacing: 0.12em;
+    }
+    .philosophy-line {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .philosophy-line.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* ===== SECTION TRANSITIONS ===== */
+    .section-transition {
+      height: 30vh; width: 100%;
+      position: relative;
+    }
+    .section-transition.white-to-black {
+      background: linear-gradient(to bottom, var(--bg), #000);
+    }
+    .section-transition.black-to-white {
+      background: linear-gradient(to bottom, #000, var(--bg));
+    }
+    .section-transition.white-to-warm {
+      background: linear-gradient(to bottom, var(--bg), var(--bg-warm));
+    }
+    .section-transition.warm-to-white {
+      background: linear-gradient(to bottom, var(--bg-warm), var(--bg));
+    }
+    .section-transition.warm-to-navy {
+      background: linear-gradient(to bottom, var(--bg-warm), var(--navy));
+    }
+    .section-transition.navy-to-white {
+      background: linear-gradient(to bottom, var(--navy), var(--bg));
+    }
+    .section-transition.white-to-navy {
+      background: linear-gradient(to bottom, var(--bg), var(--navy));
+    }
+    .section-transition.white-to-warm-2 {
+      background: linear-gradient(to bottom, var(--bg), var(--bg-warm));
+    }
+    .section-transition.warm-to-black {
+      background: linear-gradient(to bottom, var(--bg-warm), #000);
+    }
+    .section-transition.black-to-warm {
+      background: linear-gradient(to bottom, #000, var(--bg-warm));
+    }
+
+    /* ===== SECTION COMMON ===== */
+    .section { padding: 140px 48px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .sec-label {
+      font-family: var(--font-sans-en);
+      font-size: 0.6rem; font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .sec-title-en {
+      font-family: var(--font-serif-en);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300; letter-spacing: 0.08em;
+      color: var(--text); margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .sec-title-jp {
+      font-family: var(--font-serif-jp);
+      font-size: 0.9rem; font-weight: 400;
+      color: var(--text-sub); letter-spacing: 0.1em;
+      margin-bottom: 2rem;
+    }
+    .sec-lead {
+      font-family: var(--font-sans-jp);
+      font-size: 0.88rem; color: var(--text-sub);
+      line-height: 2.2; max-width: 560px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-sans-jp);
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em;
+      color: var(--navy); text-decoration: none;
+      padding: 14px 0; border-bottom: 1px solid var(--navy);
+      transition: all 0.3s;
+    }
+    .btn-primary:hover { padding-bottom: 10px; border-bottom-width: 2px; }
+    .btn-primary::after { content: '\2192'; transition: transform 0.3s; }
+    .btn-primary:hover::after { transform: translateX(4px); }
+
+    /* ===== KEN BURNS FOR ALL PHOTOS ===== */
+    @keyframes kenBurns {
+      0% { transform: scale(1.02); }
+      100% { transform: scale(1.08); }
+    }
+
+    /* ===== CINEMATIC FILTER ===== */
+    .photo-break img,
+    .facility-img img,
+    .intro-photos img {
+      filter: contrast(1.08) saturate(0.85) brightness(0.95);
+      will-change: transform;
+    }
+
+    /* ===== FULL BLEED IMAGE ===== */
+    .full-bleed {
+      width: 100vw; position: relative;
+      left: 50%; transform: translateX(-50%);
+      overflow: hidden;
+    }
+    .full-bleed img, .full-bleed video {
+      width: 100%; display: block;
+    }
+    .full-bleed-tall {
+      height: 70vh; min-height: 500px;
+    }
+    .full-bleed-tall img {
+      height: 100%; object-fit: cover;
+    }
+
+    /* ===== INTRO / ABOUT ===== */
+    #intro { background: var(--bg); }
+    .intro-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: stretch;
+    }
+    .intro-photos {
+      position: relative; overflow: hidden;
+      height: 100%; min-height: 350px;
+    }
+    .intro-photos img {
+      width: 100%; height: 100%; border-radius: 2px;
+      object-fit: cover; object-position: center;
+      animation: kenBurns 25s ease-in-out infinite alternate;
+    }
+    /* Grain texture overlay */
+    .intro-photos::after {
+      content: '';
+      position: absolute; inset: 0;
+      opacity: 0.12;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 128px;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+    @media (max-width: 900px) {
+      .intro-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* ===== NEXT GAME ===== */
+    #next-game {
+      position: relative; color: #fff;
+      padding: 100px 48px; text-align: center;
+      overflow: hidden;
+    }
+    #next-game .game-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: url('slider-images/04_stadium.png');
+      background-size: cover; background-position: center;
+      animation: kenBurns 30s ease-in-out infinite alternate;
+    }
+    #next-game .game-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(rgba(0,14,50,0.85), rgba(0,14,50,0.92));
+    }
+    #next-game .section-inner { position: relative; z-index: 1; }
+    #next-game .sec-label { color: rgba(255,255,255,0.35); }
+    .game-info {
+      display: flex; align-items: center; justify-content: center;
+      gap: 48px; margin: 3rem 0;
+    }
+    .game-team {
+      font-family: var(--font-serif-en);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300; letter-spacing: 0.15em;
+    }
+    .game-vs {
+      font-family: var(--font-serif-en);
+      font-size: 0.85rem; font-weight: 400;
+      color: rgba(255,255,255,0.3); letter-spacing: 0.2em;
+    }
+    .game-separator {
+      width: 60px; height: 1px; background: rgba(255,255,255,0.15);
+      margin: 0 auto 2rem;
+    }
+    .game-detail {
+      font-family: var(--font-sans-jp);
+      font-size: 0.82rem; color: rgba(255,255,255,0.5);
+      line-height: 2; letter-spacing: 0.05em;
+    }
+
+    /* ===== PHOTO BREAK ===== */
+    .photo-break {
+      width: 100%; height: 60vh; min-height: 400px;
+      overflow: hidden;
+    }
+    .photo-break img {
+      display: block;
+      width: 100%; height: 100%; object-fit: cover;
+      animation: kenBurns 25s ease-in-out infinite alternate;
+    }
+
+    /* ===== STATS ===== */
+    #stats { background: var(--bg-warm); }
+    .stats-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      max-width: 900px; margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .stat-item { text-align: center; padding: 20px 24px; }
+    .stat-number {
+      font-family: var(--font-serif-en);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300; color: var(--navy);
+      letter-spacing: 0.05em; line-height: 1;
+    }
+    .stat-suffix { font-size: 0.4em; font-weight: 400; }
+    .stat-label {
+      font-family: var(--font-sans-jp);
+      font-size: 0.72rem; color: var(--text-muted);
+      margin-top: 0.8rem; letter-spacing: 0.08em;
+    }
+
+    /* ===== TEAM CARDS ===== */
+    #team { background: var(--bg); }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+      background: var(--border);
+    }
+    .team-card {
+      background: var(--bg);
+      padding: 48px 32px; text-align: center;
+      text-decoration: none; color: var(--text);
+      transition: all 0.4s;
+    }
+    .team-card:hover { background: var(--bg-warm); }
+    .team-card h3 {
+      font-family: var(--font-serif-jp);
+      font-size: 1rem; font-weight: 500;
+      margin-bottom: 0.8rem; letter-spacing: 0.08em;
+    }
+    .team-card p {
+      font-size: 0.75rem; color: var(--text-muted);
+      line-height: 1.8; letter-spacing: 0.03em;
+    }
+    .team-card .card-arrow {
+      display: inline-block; margin-top: 1.2rem;
+      font-size: 0.7rem; color: var(--navy);
+      font-family: var(--font-sans-en); letter-spacing: 0.1em;
+      opacity: 0; transform: translateY(4px);
+      transition: all 0.3s;
+    }
+    .team-card:hover .card-arrow { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) {
+      .team-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== NEWS ===== */
+    #news { background: var(--bg-warm); }
+    .news-list { list-style: none; max-width: 800px; }
+    .news-item {
+      display: flex; align-items: baseline; gap: 24px;
+      padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+      text-decoration: none; color: var(--text);
+      transition: color 0.2s;
+    }
+    .news-item:hover { color: var(--navy); }
+    .news-date {
+      font-family: var(--font-sans-en);
+      font-size: 0.72rem; font-weight: 400;
+      color: var(--text-muted); white-space: nowrap;
+      letter-spacing: 0.03em; min-width: 85px;
+    }
+    .news-cat {
+      font-family: var(--font-sans-jp);
+      font-size: 0.6rem; font-weight: 500;
+      color: var(--navy); letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .news-title-text {
+      font-family: var(--font-sans-jp);
+      font-size: 0.85rem; font-weight: 400;
+      line-height: 1.6; letter-spacing: 0.02em;
+    }
+    @media (max-width: 768px) {
+      .news-item { flex-wrap: wrap; gap: 8px; }
+    }
+
+    /* ===== FACILITIES ===== */
+    #facilities { background: var(--bg); padding: 0; }
+    .facilities-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .facility-img {
+      height: 70vh; min-height: 500px; overflow: hidden;
+    }
+    .facility-img img {
+      display: block;
+      width: 100%; height: 100%; object-fit: cover;
+      animation: kenBurns 25s ease-in-out infinite alternate;
+    }
+    .facility-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 64px;
+    }
+    .facility-text h3 {
+      font-family: var(--font-serif-en);
+      font-size: 1.8rem; font-weight: 300;
+      letter-spacing: 0.08em; margin-bottom: 0.5rem;
+    }
+    .facility-text .subtitle {
+      font-family: var(--font-serif-jp);
+      font-size: 0.85rem; font-weight: 400;
+      color: var(--text-sub); margin-bottom: 1.5rem;
+    }
+    .facility-text p {
+      font-size: 0.82rem; color: var(--text-muted);
+      line-height: 2; max-width: 380px;
+    }
+    .facilities-split.reverse { direction: rtl; }
+    .facilities-split.reverse > * { direction: ltr; }
+    @media (max-width: 900px) {
+      .facilities-split, .facilities-split.reverse { grid-template-columns: 1fr; direction: ltr; }
+      .facility-text { padding: 48px 24px; }
+      .facility-img { height: 50vh; }
+    }
+
+    /* ===== BRAND STATEMENT ===== */
+    #brand-statement {
+      background: #000; color: #fff;
+      height: 100vh; min-height: 500px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 2rem;
+    }
+    .brand-inner {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+    .brand-inner.visible { opacity: 1; transform: translateY(0); }
+    .brand-emblem {
+      width: 60px; height: 60px; margin-bottom: 2.5rem;
+      opacity: 0.7;
+    }
+    .brand-title {
+      font-family: var(--font-serif-en);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300; letter-spacing: 0.2em;
+      margin-bottom: 0.8rem;
+    }
+    .brand-since {
+      font-family: var(--font-serif-en);
+      font-size: 0.85rem; font-weight: 300;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.25em;
+    }
+
+    /* ===== SOCIAL ===== */
+    #social {
+      background: var(--bg-warm); text-align: center;
+      padding: 80px 48px;
+    }
+    .social-links {
+      display: flex; justify-content: center; gap: 16px; margin-top: 2rem;
+    }
+    .social-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.12); color: var(--text);
+      font-family: var(--font-sans-en); font-weight: 500; font-size: 0.7rem;
+      text-decoration: none; transition: all 0.3s;
+      letter-spacing: -0.02em;
+    }
+    .social-link:hover {
+      background: var(--navy); color: #fff; border-color: var(--navy);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0a0a0a; color: rgba(255,255,255,0.5);
+      padding: 80px 48px 40px;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand img {
+      height: 28px; margin-bottom: 1.5rem;
+      filter: brightness(0) invert(1); opacity: 0.6;
+    }
+    .footer-brand p {
+      font-size: 0.72rem; line-height: 2; color: rgba(255,255,255,0.35);
+    }
+    .footer-col h4 {
+      font-family: var(--font-sans-en);
+      font-size: 0.6rem; font-weight: 600;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .footer-col a {
+      display: block; font-size: 0.78rem;
+      color: rgba(255,255,255,0.45); text-decoration: none;
+      margin-bottom: 0.7rem; transition: color 0.2s;
+      letter-spacing: 0.03em;
+    }
+    .footer-col a:hover { color: rgba(255,255,255,0.8); }
+    .footer-bottom {
+      max-width: 1100px; margin: 48px auto 0;
+      padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.65rem; color: rgba(255,255,255,0.2);
+      font-family: var(--font-sans-en); letter-spacing: 0.05em;
+    }
+    .footer-bottom a { color: rgba(255,255,255,0.2); text-decoration: none; }
+    .footer-bottom a:hover { color: rgba(255,255,255,0.5); }
+    @media (max-width: 900px) {
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; }
+      .section { padding: 80px 24px; }
+    }
+
+    /* ===== STAGGER ANIMATION ===== */
+    .stagger-in > * {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: opacity, transform;
+    }
+    .stagger-in.visible > *:nth-child(1) { transition-delay: 0s; }
+    .stagger-in.visible > *:nth-child(2) { transition-delay: 0.12s; }
+    .stagger-in.visible > *:nth-child(3) { transition-delay: 0.24s; }
+    .stagger-in.visible > *:nth-child(4) { transition-delay: 0.36s; }
+    .stagger-in.visible > *:nth-child(5) { transition-delay: 0.48s; }
+    .stagger-in.visible > *:nth-child(6) { transition-delay: 0.60s; }
+    .stagger-in.visible > *:nth-child(7) { transition-delay: 0.72s; }
+    .stagger-in.visible > * {
+      opacity: 0; transform: translateY(20px);
+    }
+    .stagger-in.visible > * {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* ===== FADE IN ===== */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay { transition-delay: 0.2s; }
+    .fade-in-delay-2 { transition-delay: 0.4s; }
+
+    /* ===== DOT NAVIGATION ===== */
+    .dot-nav {
+      position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+      z-index: 999; display: flex; flex-direction: column; gap: 14px;
+    }
+    .dot-nav a {
+      display: block; width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.4s; text-decoration: none;
+    }
+    .dot-nav a.active {
+      background: #fff; border-color: #fff;
+      box-shadow: 0 0 8px rgba(255,255,255,0.4);
+    }
+    /* When on light sections */
+    .dot-nav.on-light a {
+      background: rgba(0,30,98,0.15); border-color: rgba(0,30,98,0.25);
+    }
+    .dot-nav.on-light a.active {
+      background: var(--navy); border-color: var(--navy);
+      box-shadow: 0 0 8px rgba(0,30,98,0.3);
+    }
+    @media (max-width: 900px) {
+      .dot-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader">
+  <img src="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2020/11/wappen512x512.png" alt="Loading">
+</div>
+
+<!-- Dot Navigation -->
+<nav class="dot-nav" id="dotNav">
+  <a href="#hero" title="Top"></a>
+  <a href="#philosophy" title="Philosophy"></a>
+  <a href="#intro" title="About"></a>
+  <a href="#next-game" title="Next Game"></a>
+  <a href="#stats" title="Stats"></a>
+  <a href="#team" title="Team"></a>
+  <a href="#news" title="News"></a>
+  <a href="#facilities" title="Facilities"></a>
+  <a href="#brand-statement" title="Brand"></a>
+  <a href="#social" title="Social"></a>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#intro" onclick="closeMobile()">チーム紹介</a>
+  <a href="#next-game" onclick="closeMobile()">試合情報</a>
+  <a href="#news" onclick="closeMobile()">ニュース</a>
+  <a href="https://baseball.sfc.keio.ac.jp/members/2026allmembers" target="_blank" onclick="closeMobile()">部員紹介</a>
+  <a href="https://baseball.sfc.keio.ac.jp/forapplicants/joinus" target="_blank" onclick="closeMobile()">入部案内</a>
+  <a href="https://baseball.sfc.keio.ac.jp/contact-us" target="_blank" onclick="closeMobile()">お問い合わせ</a>
+</div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2021/02/logo_20210210.png" alt="慶應義塾体育会野球部" class="logo-white">
+    </a>
+    <div class="nav-links">
+      <a href="#intro">チーム紹介</a>
+      <a href="#next-game">試合情報</a>
+      <a href="#news">ニュース</a>
+      <a href="https://baseball.sfc.keio.ac.jp/members/2026allmembers" target="_blank">部員紹介</a>
+      <a href="https://baseball.sfc.keio.ac.jp/contact-us" target="_blank">お問い合わせ</a>
+      <span class="nav-separator"></span>
+      <a href="https://baseball.sfc.keio.ac.jp/forapplicants/joinus" target="_blank" class="nav-cta">入部案内</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero" data-dot-dark>
+  <div class="hero-slider">
+    <img class="hero-slide active" src="slider-images/01_batter1.png" alt="バッター">
+    <img class="hero-slide" src="slider-images/04_stadium.png" alt="神宮球場">
+    <img class="hero-slide" src="slider-images/03_pitcher.png" alt="ピッチャー">
+    <img class="hero-slide" src="slider-images/02_batter2.png" alt="バッター">
+  </div>
+  <div id="hero-content">
+    <img src="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2020/11/wappen512x512.png" alt="部章" class="hero-emblem">
+    <h1 class="hero-title">KEIO<br>BASEBALL</h1>
+    <p class="hero-sub">慶應義塾体育会野球部</p>
+    <p class="hero-year">Since 1888</p>
+  </div>
+  <div class="scroll-indicator"></div>
+</section>
+
+<!-- Transition: Hero → Philosophy -->
+<div class="section-transition" style="background:linear-gradient(to bottom, #1a1a1a, #000);"></div>
+
+<!-- Philosophy -->
+<section id="philosophy" data-dot-dark>
+  <div class="philosophy-inner">
+    <div class="philosophy-quote philosophy-line">"陸の王者たれ"</div>
+    <div class="philosophy-body">
+      <span class="philosophy-line">1888年の創部以来、</span><br>
+      <span class="philosophy-line">学生野球の先導役を果たしてきた。</span><br><br>
+      <span class="philosophy-line">文武両道の精神を胸に、</span><br>
+      <span class="philosophy-line">神宮の舞台で頂点を目指す。</span>
+    </div>
+  </div>
+</section>
+
+<!-- Transition: Philosophy → Intro -->
+<div class="section-transition black-to-white"></div>
+
+<!-- Intro -->
+<section id="intro" class="section">
+  <div class="section-inner">
+    <div class="intro-grid">
+      <div class="stagger-in">
+        <div class="sec-label">About</div>
+        <h2 class="sec-title-en">Inspired by<br>History</h2>
+        <p class="sec-title-jp">練習は不可能を可能にする</p>
+        <p class="sec-lead">
+          1888年、明治21年に創部。<br>
+          日本の大学野球の草分けとして<br>
+          130年以上の歴史を刻んできました。<br><br>
+          東京六大学野球連盟に所属し、<br>
+          神宮球場を舞台に数々の名勝負を繰り広げ、<br>
+          文武両道の精神を体現し続けています。
+        </p>
+        <div style="margin-top:2.5rem;">
+          <a href="https://baseball.sfc.keio.ac.jp/team/history" target="_blank" class="btn-primary">野球部の歴史</a>
+        </div>
+      </div>
+      <div class="intro-photos fade-in fade-in-delay">
+        <img src="slider-images/07_calligraphy.jpg" alt="練習は不可能を可能にする" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full bleed photo: 神宮球場 -->
+<div class="photo-break fade-in">
+  <img src="slider-images/04_stadium.png" alt="明治神宮野球場" loading="lazy">
+</div>
+
+<!-- Next Game -->
+<section id="next-game" data-dot-dark>
+  <div class="game-bg"></div>
+  <div class="section-inner fade-in" style="position:relative;z-index:1;">
+    <div class="sec-label">Next Game</div>
+    <div class="game-info">
+      <span class="game-team">KEIO</span>
+      <span class="game-vs">VS</span>
+      <span class="game-team">TOKYO</span>
+    </div>
+    <div class="game-separator"></div>
+    <div class="game-detail">
+      第3回大学野球スプリングフレッシュリーグ in 茨城<br>
+      3月21日（土）12:30<br>
+      ノーブルホームスタジアム水戸
+    </div>
+    <div style="margin-top:2.5rem;">
+      <a href="https://baseball.sfc.keio.ac.jp/sr" target="_blank" class="btn-primary" style="color:rgba(255,255,255,0.6); border-color:rgba(255,255,255,0.3);">試合日程</a>
+    </div>
+  </div>
+</section>
+
+<!-- Full bleed photo: ピッチャー -->
+<div class="photo-break fade-in">
+  <img src="slider-images/03_pitcher.png" alt="投球" loading="lazy">
+</div>
+
+<!-- Stats -->
+<section id="stats" class="section">
+  <div class="section-inner">
+    <div class="sec-label fade-in" style="text-align:center;">History</div>
+    <div class="stats-row fade-in">
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="136">0</span><span class="stat-suffix"> 年</span></div>
+        <div class="stat-label">創部からの歴史</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="38">0</span><span class="stat-suffix"> 回</span></div>
+        <div class="stat-label">リーグ優勝</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="4">0</span><span class="stat-suffix"> 回</span></div>
+        <div class="stat-label">大学日本一</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="150">0</span><span class="stat-suffix"> 名+</span></div>
+        <div class="stat-label">部員数</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Full bleed photo: バッター -->
+<div class="photo-break fade-in">
+  <img src="slider-images/02_batter2.png" alt="打席" loading="lazy">
+</div>
+
+<!-- Team -->
+<section id="team" class="section" style="padding-bottom:0;">
+  <div class="section-inner">
+    <div class="sec-label fade-in">Team</div>
+    <h2 class="sec-title-en fade-in">Explore</h2>
+    <p class="sec-title-jp fade-in">チームを知る</p>
+  </div>
+  <div class="team-grid fade-in" style="margin-top:3rem;">
+    <a href="https://baseball.sfc.keio.ac.jp/members/2026allmembers" target="_blank" class="team-card">
+      <h3>部員一覧</h3>
+      <p>選手・マネージャー・スタッフ</p>
+      <span class="card-arrow">VIEW &rarr;</span>
+    </a>
+    <a href="https://baseball.sfc.keio.ac.jp/members/leaders" target="_blank" class="team-card">
+      <h3>首脳陣・スタッフ</h3>
+      <p>監督・コーチ陣の紹介</p>
+      <span class="card-arrow">VIEW &rarr;</span>
+    </a>
+    <a href="https://baseball.sfc.keio.ac.jp/cheeringsection/about-cheering" target="_blank" class="team-card">
+      <h3>応援席に行こう</h3>
+      <p>観戦・応援ガイド</p>
+      <span class="card-arrow">VIEW &rarr;</span>
+    </a>
+    <a href="https://baseball.sfc.keio.ac.jp/team/record" target="_blank" class="team-card">
+      <h3>戦歴</h3>
+      <p>東京六大学リーグ戦の記録</p>
+      <span class="card-arrow">VIEW &rarr;</span>
+    </a>
+    <a href="https://baseball.sfc.keio.ac.jp/team/social" target="_blank" class="team-card">
+      <h3>社会貢献活動</h3>
+      <p>野球を通じた地域への取り組み</p>
+      <span class="card-arrow">VIEW &rarr;</span>
+    </a>
+    <a href="https://baseball.sfc.keio.ac.jp/forapplicants/joinus" target="_blank" class="team-card">
+      <h3>入部案内</h3>
+      <p>入部を希望する方へ</p>
+      <span class="card-arrow">VIEW &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<!-- News -->
+<section id="news" class="section">
+  <div class="section-inner">
+    <div class="stagger-in">
+      <div class="sec-label">News</div>
+      <h2 class="sec-title-en">Latest</h2>
+      <p class="sec-title-jp">お知らせ</p>
+    </div>
+    <ul class="news-list fade-in" style="margin-top:2rem;">
+      <li>
+        <a href="https://baseball.sfc.keio.ac.jp/52962" target="_blank" class="news-item">
+          <span class="news-date">2026.03.21</span>
+          <span class="news-cat">試合結果</span>
+          <span class="news-title-text">令和8年度春季オープン戦 対東京農業大(A)</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://baseball.sfc.keio.ac.jp/52892" target="_blank" class="news-item">
+          <span class="news-date">2026.03.21</span>
+          <span class="news-cat">試合予定</span>
+          <span class="news-title-text">令和8年度春季オープン戦 1試合時刻変更、3試合追加</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://baseball.sfc.keio.ac.jp/52731" target="_blank" class="news-item">
+          <span class="news-date">2026.03.20</span>
+          <span class="news-cat">試合結果</span>
+          <span class="news-title-text">第3回大学野球スプリングフレッシュリーグ in 茨城 vs 立教大</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://baseball.sfc.keio.ac.jp/47306" target="_blank" class="news-item">
+          <span class="news-date">2026.03.20</span>
+          <span class="news-cat">試合結果</span>
+          <span class="news-title-text">令和8年度春季オープン戦 対明治学院大(B)</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://baseball.sfc.keio.ac.jp/47292" target="_blank" class="news-item">
+          <span class="news-date">2026.03.20</span>
+          <span class="news-cat">試合結果</span>
+          <span class="news-title-text">令和8年度春季オープン戦 対名城大(A)</span>
+        </a>
+      </li>
+    </ul>
+    <div style="margin-top:2.5rem;">
+      <a href="https://baseball.sfc.keio.ac.jp/news" target="_blank" class="btn-primary">すべてのニュースを見る</a>
+    </div>
+  </div>
+</section>
+
+<!-- Facilities — NOTA HOTEL style split layout -->
+<section id="facilities">
+  <div class="facilities-split fade-in">
+    <div class="facility-img">
+      <img src="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2020/12/jinguukyuuzyou.jpg" alt="神宮球場" loading="lazy">
+    </div>
+    <div class="facility-text">
+      <div class="sec-label">Home Ground</div>
+      <h3>Jingu Stadium</h3>
+      <p class="subtitle">明治神宮野球場</p>
+      <p>東京六大学野球連盟のリーグ戦が行われる聖地。数々の名勝負が繰り広げられてきた、慶應野球部のホームグラウンドです。</p>
+    </div>
+  </div>
+  <div class="facilities-split reverse fade-in">
+    <div class="facility-text">
+      <div class="sec-label">Training Ground</div>
+      <h3>Shimoda Ground</h3>
+      <p class="subtitle">下田グラウンド</p>
+      <p>横浜市港北区の日吉キャンパスに隣接する専用練習場。部員たちが日々の鍛錬を積む、慶應野球部の拠点です。</p>
+    </div>
+    <div class="facility-img">
+      <img src="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2020/12/shimoda_ground.jpg" alt="下田グラウンド" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- Full bleed: KEIOボール -->
+<div class="photo-break fade-in" style="height:85vh;min-height:600px;">
+  <img src="slider-images/05_ball.png" alt="KEIO Baseball" loading="lazy" style="object-position:center center;">
+</div>
+
+<!-- Brand Statement -->
+<section id="brand-statement" data-dot-dark>
+  <div class="brand-inner">
+    <img src="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2020/11/wappen512x512.png" alt="部章" class="brand-emblem">
+    <div class="brand-title">Keio Baseball</div>
+    <div class="brand-since">Since 1888</div>
+  </div>
+</section>
+
+<!-- Social -->
+<section id="social">
+  <div class="section-inner fade-in">
+    <div class="sec-label">Follow Us</div>
+    <h2 class="sec-title-en" style="text-align:center;">Stay Connected</h2>
+    <div class="social-links">
+      <a href="https://twitter.com/KeiobbcOfficial" target="_blank" class="social-link" title="X">X</a>
+      <a href="https://www.facebook.com/keiobbc/" target="_blank" class="social-link" title="Facebook">Fb</a>
+      <a href="https://www.instagram.com/keiobbcofficial/" target="_blank" class="social-link" title="Instagram">Ig</a>
+      <a href="https://www.youtube.com/@tokyo6s-official" target="_blank" class="social-link" title="YouTube">YT</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2021/02/logo_20210210.png" alt="慶應義塾体育会野球部">
+      <p>
+        〒223-0064<br>
+        神奈川県横浜市港北区下田町2-14-5<br>
+        慶應義塾体育会野球部第一合宿所<br><br>
+        TEL 045-563-2001<br>
+        KeioBaseball@aol.com
+      </p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <a href="https://baseball.sfc.keio.ac.jp/news" target="_blank">お知らせ</a>
+      <a href="https://baseball.sfc.keio.ac.jp/team/history" target="_blank">野球部の歴史</a>
+      <a href="https://baseball.sfc.keio.ac.jp/sr" target="_blank">試合情報</a>
+      <a href="https://baseball.sfc.keio.ac.jp/members/2026allmembers" target="_blank">部員紹介</a>
+      <a href="https://baseball.sfc.keio.ac.jp/forapplicants/joinus" target="_blank">入部案内</a>
+      <a href="https://baseball.sfc.keio.ac.jp/contact-us" target="_blank">お問い合わせ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Related</h4>
+      <a href="https://www.big6.gr.jp/" target="_blank">東京六大学野球連盟</a>
+      <a href="http://www.mita-club.com/" target="_blank">三田倶楽部（OB会）</a>
+      <a href="https://www.kri.sfc.keio.ac.jp/ja/lab/baseball/" target="_blank">SFC野球研究室</a>
+      <a href="https://keiobaseball-official.shop" target="_blank">ファングッズショップ</a>
+      <a href="https://keiobaseballclub.studio.site/" target="_blank">慶應義塾野球倶楽部</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; Keio University Baseball Club</span>
+    <div>
+      <a href="https://baseball.sfc.keio.ac.jp/privacy-policy" target="_blank">Privacy</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://baseball.sfc.keio.ac.jp/snsguideline/" target="_blank">SNS Guidelines</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // === LOADER ===
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.getElementById('loader').classList.add('done');
+    }, 1500);
+  });
+
+  // === HERO PANORAMA CROSSFADE SLIDER ===
+  (function() {
+    var slides = document.querySelectorAll('.hero-slide');
+    if (slides.length === 0) return;
+    var current = 0;
+    var interval = 4000; // 4s per slide
+
+    function nextSlide() {
+      // Remove active + reset animation on current slide
+      slides[current].classList.remove('active');
+      slides[current].style.animation = 'none';
+      // Force reflow
+      void slides[current].offsetWidth;
+
+      // Advance
+      current = (current + 1) % slides.length;
+
+      // Activate next slide with fresh animation
+      slides[current].style.animation = '';
+      slides[current].classList.add('active');
+    }
+
+    setInterval(nextSlide, interval);
+  })();
+
+  // === HAMBURGER ===
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // === NAVBAR SCROLL ===
+  window.addEventListener('scroll', function() {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // === FADE-IN (Intersection Observer) ===
+  var fadeObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(function(el) { fadeObs.observe(el); });
+
+  // === STAGGER-IN (Intersection Observer) ===
+  var staggerObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); staggerObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.stagger-in').forEach(function(el) { staggerObs.observe(el); });
+
+  // === PHILOSOPHY LINES (stagger fade-in) ===
+  var philoObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        var lines = e.target.querySelectorAll('.philosophy-line');
+        lines.forEach(function(line, i) {
+          setTimeout(function() { line.classList.add('visible'); }, i * 150);
+        });
+        philoObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  var philoEl = document.getElementById('philosophy');
+  if (philoEl) philoObs.observe(philoEl);
+
+  // === BRAND STATEMENT FADE ===
+  var brandObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); brandObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.brand-inner').forEach(function(el) { brandObs.observe(el); });
+
+  // === COUNTER ===
+  function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+  var cObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry, i) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      var target = parseInt(el.dataset.target);
+      var start = performance.now();
+      setTimeout(function() {
+        (function update(now) {
+          var p = Math.min((now - start) / 2000, 1);
+          el.textContent = Math.floor(easeOutExpo(p) * target);
+          if (p < 1) requestAnimationFrame(update);
+        })(performance.now());
+      }, i * 150);
+      cObs.unobserve(el);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.counter').forEach(function(el) { cObs.observe(el); });
+
+  // === DOT NAVIGATION ===
+  var dotNav = document.getElementById('dotNav');
+  var dotLinks = dotNav.querySelectorAll('a');
+  var dotSections = [];
+  dotLinks.forEach(function(a) {
+    var id = a.getAttribute('href').replace('#', '');
+    var sec = document.getElementById(id);
+    if (sec) dotSections.push({ el: sec, link: a, dark: sec.hasAttribute('data-dot-dark') });
+  });
+
+  function updateDots() {
+    var scrollY = window.scrollY + window.innerHeight * 0.4;
+    var activeIdx = 0;
+    var onDark = false;
+    dotSections.forEach(function(s, i) {
+      var top = s.el.offsetTop;
+      var bottom = top + s.el.offsetHeight;
+      if (scrollY >= top && scrollY < bottom) {
+        activeIdx = i;
+        onDark = s.dark;
+      }
+    });
+    dotLinks.forEach(function(a, i) {
+      a.classList.toggle('active', i === activeIdx);
+    });
+    dotNav.classList.toggle('on-light', !onDark);
+  }
+  window.addEventListener('scroll', updateDots, { passive: true });
+  updateDots();
+</script>
+
+</body>
+</html>
