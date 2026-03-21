@@ -231,14 +231,17 @@
       0%,100% { opacity: 1; transform: scaleY(1); }
       50% { opacity: 0.4; transform: scaleY(0.6); }
     }
-    /* Mobile: smaller height, bigger pan */
+    /* Mobile: fill viewport, center subject */
     @media (max-width: 900px) {
       .hero-slide {
-        height: 50vh;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        transform: none;
+        object-fit: cover;
+        object-position: center center;
       }
-      @keyframes panHorizontal {
-        0% { transform: translateY(-50%) translateX(0); }
-        100% { transform: translateY(-50%) translateX(-50%); }
+      .hero-slide.active {
+        animation: none;
       }
     }
 
@@ -455,7 +458,23 @@
     .photo-break img {
       display: block;
       width: 100%; height: 100%; object-fit: cover;
+      object-position: center center;
       animation: kenBurns 25s ease-in-out infinite alternate;
+    }
+    .photo-break-tall {
+      height: 85vh; min-height: 600px;
+    }
+    @media (max-width: 900px) {
+      .photo-break {
+        height: auto; min-height: unset;
+      }
+      .photo-break img {
+        object-fit: contain;
+        height: auto;
+      }
+      .photo-break-tall {
+        height: auto; min-height: unset;
+      }
     }
 
     /* ===== STATS ===== */
@@ -555,6 +574,7 @@
     .facility-img img {
       display: block;
       width: 100%; height: 100%; object-fit: cover;
+      object-position: center center;
       animation: kenBurns 25s ease-in-out infinite alternate;
     }
     .facility-text {
@@ -580,7 +600,8 @@
     @media (max-width: 900px) {
       .facilities-split, .facilities-split.reverse { grid-template-columns: 1fr; direction: ltr; }
       .facility-text { padding: 48px 24px; }
-      .facility-img { height: 50vh; }
+      .facility-img { height: auto; min-height: unset; }
+      .facility-img img { object-fit: contain; height: auto; }
     }
 
     /* ===== BRAND STATEMENT ===== */
@@ -1029,8 +1050,8 @@
 </section>
 
 <!-- Full bleed: KEIOボール -->
-<div class="photo-break fade-in" style="height:85vh;min-height:600px;">
-  <img src="slider-images/05_ball.jpg" alt="KEIO Baseball" loading="lazy" style="object-position:center center;">
+<div class="photo-break photo-break-tall fade-in">
+  <img src="slider-images/05_ball.jpg" alt="KEIO Baseball" loading="lazy">
 </div>
 
 <!-- Brand Statement -->
