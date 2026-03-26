@@ -157,18 +157,20 @@
       opacity: 0.15;
       filter: blur(3px) saturate(0.5);
     }
-    /* Player cutout — center stage */
+    /* Player cutout — center stage, blended edges */
     .hero-player {
       position: absolute;
-      bottom: 0; left: 50%;
+      bottom: -5%; left: 50%;
       transform: translateX(-50%);
       z-index: 2;
-      height: 88vh;
+      height: 95vh;
       width: auto;
       object-fit: contain;
-      filter: contrast(1.12) brightness(1.05) saturate(1.1);
+      filter: contrast(1.05) brightness(0.95) saturate(0.9);
       opacity: 0;
       animation: playerReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+      -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, #000 40%, transparent 100%);
+      mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, #000 40%, transparent 100%);
     }
     @keyframes playerReveal {
       0% { opacity: 0; transform: translateX(-50%) translateY(40px) scale(0.97); }
@@ -177,9 +179,9 @@
     /* Spotlight glow behind player */
     .hero-player-glow {
       position: absolute;
-      bottom: 5%; left: 50%; transform: translateX(-50%);
-      width: 50vw; height: 70vh;
-      background: radial-gradient(ellipse at center bottom, rgba(0,30,98,0.25) 0%, transparent 70%);
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 60vw; height: 80vh;
+      background: radial-gradient(ellipse at center 60%, rgba(0,30,98,0.2) 0%, transparent 65%);
       z-index: 1;
       pointer-events: none;
     }
