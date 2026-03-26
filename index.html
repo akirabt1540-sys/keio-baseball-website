@@ -144,72 +144,84 @@
       .hamburger { display: block; }
     }
 
-    /* ===== HERO — Panorama Crossfade Slider ===== */
+    /* ===== HERO — Player Showcase ===== */
     #hero {
       position: relative; height: 100vh; overflow: hidden;
-      background: #000;
+      background: radial-gradient(ellipse at 50% 60%, #0a1628 0%, #000 70%);
     }
-    /* Slider container — vertically centered, holds panorama images */
-    .hero-slider {
+    /* Subtle stadium background */
+    .hero-bg {
       position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
+      background-image: url('slider-images/04_stadium.jpg');
+      background-size: cover; background-position: center;
+      opacity: 0.15;
+      filter: blur(3px) saturate(0.5);
     }
-    .hero-slide {
+    /* Player cutout — center stage */
+    .hero-player {
       position: absolute;
-      top: 50%; left: 0;
-      transform: translateY(-50%);
-      height: 70vh;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      height: 88vh;
       width: auto;
+      object-fit: contain;
+      filter: contrast(1.12) brightness(1.05) saturate(1.1);
       opacity: 0;
-      transition: opacity 1.5s ease;
-      will-change: opacity, transform;
-      filter: contrast(1.08) saturate(0.85) brightness(0.95);
+      animation: playerReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
     }
-    .hero-slide.active {
-      opacity: 1;
+    @keyframes playerReveal {
+      0% { opacity: 0; transform: translateX(-50%) translateY(40px) scale(0.97); }
+      100% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
     }
-    @keyframes panHorizontal {
-      0% { transform: translateY(-50%) translateX(0); }
-      100% { transform: translateY(-50%) translateX(-30%); }
+    /* Spotlight glow behind player */
+    .hero-player-glow {
+      position: absolute;
+      bottom: 5%; left: 50%; transform: translateX(-50%);
+      width: 50vw; height: 70vh;
+      background: radial-gradient(ellipse at center bottom, rgba(0,30,98,0.25) 0%, transparent 70%);
+      z-index: 1;
+      pointer-events: none;
     }
-    .hero-slide.active {
-      animation: panHorizontal 15s ease-in-out forwards;
-    }
-    /* Dark overlay */
+    /* Dark overlay for text readability */
     #hero::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.35) 0%,
-        rgba(0,0,0,0.15) 30%,
-        rgba(0,0,0,0.15) 70%,
-        rgba(0,0,0,0.4) 100%
+        rgba(0,0,0,0.5) 0%,
+        rgba(0,0,0,0.05) 35%,
+        rgba(0,0,0,0.05) 60%,
+        rgba(0,0,0,0.6) 100%
       );
-      z-index: 1;
+      z-index: 3;
+      pointer-events: none;
     }
-    /* Hero content */
+    /* Hero text — overlaid on top */
     #hero-content {
-      position: absolute; inset: 0; z-index: 2;
+      position: absolute; inset: 0; z-index: 4;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
       text-align: center; padding: 2rem;
+      pointer-events: none;
     }
     .hero-emblem {
-      width: 72px; height: 72px; margin-bottom: 2rem;
+      width: 64px; height: 64px; margin-bottom: 1.5rem;
       opacity: 0.9;
     }
     .hero-title {
       font-family: var(--font-serif-en);
-      font-size: clamp(2.5rem, 7vw, 5.5rem);
-      font-weight: 300; line-height: 1.05;
-      letter-spacing: 0.25em;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 300; line-height: 1.0;
+      letter-spacing: 0.3em;
       color: #fff;
-      text-shadow: 0 2px 40px rgba(0,0,0,0.15);
+      text-shadow: 0 4px 60px rgba(0,0,0,0.5), 0 0 120px rgba(0,30,98,0.3);
+      mix-blend-mode: normal;
     }
     .hero-sub {
       font-family: var(--font-serif-jp);
       font-size: clamp(0.85rem, 1.5vw, 1rem);
       font-weight: 300; color: rgba(255,255,255,0.7);
       letter-spacing: 0.3em; margin-top: 1rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
     }
     .hero-year {
       font-family: var(--font-serif-en);
@@ -219,7 +231,7 @@
     }
     .scroll-indicator {
       position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
-      z-index: 2;
+      z-index: 5;
     }
     .scroll-indicator::after {
       content: '';
@@ -231,17 +243,12 @@
       0%,100% { opacity: 1; transform: scaleY(1); }
       50% { opacity: 0.4; transform: scaleY(0.6); }
     }
-    /* Mobile: fill viewport, center subject */
     @media (max-width: 900px) {
-      .hero-slide {
-        left: 0; top: 0;
-        width: 100%; height: 100%;
-        transform: none;
-        object-fit: cover;
-        object-position: center center;
+      .hero-player {
+        height: 70vh;
       }
-      .hero-slide.active {
-        animation: none;
+      .hero-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
       }
     }
 
@@ -808,12 +815,9 @@
 
 <!-- Hero -->
 <section id="hero" data-dot-dark>
-  <div class="hero-slider">
-    <img class="hero-slide active" src="slider-images/01_batter1.jpg" alt="バッター">
-    <img class="hero-slide" src="slider-images/04_stadium.jpg" alt="神宮球場">
-    <img class="hero-slide" src="slider-images/03_pitcher.jpg" alt="ピッチャー">
-    <img class="hero-slide" src="slider-images/02_batter2.jpg" alt="バッター">
-  </div>
+  <div class="hero-bg"></div>
+  <div class="hero-player-glow"></div>
+  <img class="hero-player" src="slider-images/catcher_hero.png" alt="キャッチャー">
   <div id="hero-content">
     <img src="https://baseball.sfc.keio.ac.jp/wp/wp-content/uploads/2020/11/wappen512x512.png" alt="部章" class="hero-emblem">
     <h1 class="hero-title">KEIO<br>BASEBALL</h1>
@@ -1126,30 +1130,6 @@
     }, 1500);
   });
 
-  // === HERO PANORAMA CROSSFADE SLIDER ===
-  (function() {
-    var slides = document.querySelectorAll('.hero-slide');
-    if (slides.length === 0) return;
-    var current = 0;
-    var interval = 4000; // 4s per slide
-
-    function nextSlide() {
-      // Remove active + reset animation on current slide
-      slides[current].classList.remove('active');
-      slides[current].style.animation = 'none';
-      // Force reflow
-      void slides[current].offsetWidth;
-
-      // Advance
-      current = (current + 1) % slides.length;
-
-      // Activate next slide with fresh animation
-      slides[current].style.animation = '';
-      slides[current].classList.add('active');
-    }
-
-    setInterval(nextSlide, interval);
-  })();
 
   // === HAMBURGER ===
   var hamburger = document.getElementById('hamburger');
